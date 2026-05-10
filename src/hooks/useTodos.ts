@@ -4,6 +4,7 @@ import type { Todo, FilterType } from '../types/todo';
 const STORAGE_KEY = 'todo-app-items';
 
 function load(): Todo[] {
+  if (typeof window === 'undefined') return [];
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     return raw ? (JSON.parse(raw) as Todo[]) : [];

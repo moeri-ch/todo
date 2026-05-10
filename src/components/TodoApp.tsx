@@ -1,9 +1,11 @@
-import { useTodos } from './hooks/useTodos';
-import { TodoInput } from './components/TodoInput';
-import { TodoList } from './components/TodoList';
-import { FilterBar } from './components/FilterBar';
+'use client';
 
-export default function App() {
+import { useTodos } from '@/hooks/useTodos';
+import { TodoInput } from './TodoInput';
+import { TodoList } from './TodoList';
+import { FilterBar } from './FilterBar';
+
+export function TodoApp() {
   const {
     todos,
     totalCount,
