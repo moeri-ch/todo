@@ -1,6 +1,3 @@
-/* ==================
-   Base & Reset
-   ================== */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -8,20 +5,25 @@
 }
 
 :root {
-  --bg: #f0f2ff;
+  --gradient: linear-gradient(135deg, #5C6FE0 0%, #8B5CF6 55%, #C936D9 100%);
+  --bg: #ECEFFE;
   --surface: #ffffff;
-  --primary: #6366f1;
-  --primary-hover: #4f46e5;
-  --primary-light: #eef2ff;
-  --success: #10b981;
-  --danger: #f43f5e;
-  --text: #1e1b4b;
-  --text-2: #6b7280;
-  --text-3: #9ca3af;
-  --border: #e5e7eb;
-  --shadow: 0 20px 60px rgba(99, 102, 241, 0.15);
-  --radius: 16px;
-  --transition: 150ms ease;
+  --primary: #5C6FE0;
+  --primary-2: #8B5CF6;
+  --primary-light: #EEF0FC;
+  --success: #22C55E;
+  --danger: #F43F5E;
+  --text: #111827;
+  --text-2: #6B7280;
+  --text-3: #9CA3AF;
+  --border: #E5E9F8;
+  --item-bg: #F7F8FF;
+  --shadow-sm: 0 2px 8px rgba(92, 111, 224, 0.08);
+  --shadow-md: 0 8px 30px rgba(92, 111, 224, 0.14);
+  --shadow-lg: 0 24px 64px rgba(92, 111, 224, 0.2);
+  --r: 24px;
+  --r-sm: 14px;
+  --t: 150ms ease;
 }
 
 body {
@@ -32,41 +34,89 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 60px 16px 80px;
+  padding: 40px 20px 80px;
   line-height: 1.5;
 }
 
 /* ==================
-   Layout
+   App wrapper
    ================== */
 .app {
   width: 100%;
-  max-width: 580px;
+  max-width: 480px;
 }
 
 /* ==================
-   Header
+   Gradient Header
    ================== */
 .app-header {
-  text-align: center;
-  margin-bottom: 32px;
+  background: var(--gradient);
+  border-radius: var(--r) var(--r) 0 0;
+  padding: 40px 24px 52px;
+  color: white;
+  position: relative;
+}
+
+.header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .app-header h1 {
-  font-size: 3.5rem;
+  font-size: 2rem;
   font-weight: 800;
-  letter-spacing: -0.04em;
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: white;
+  letter-spacing: -0.03em;
   line-height: 1.1;
 }
 
 .app-header .tagline {
-  margin-top: 8px;
-  font-size: 0.9rem;
-  color: var(--text-2);
+  margin-top: 6px;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* Progress badge */
+.header-badge {
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 16px;
+  padding: 10px 16px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  min-width: 64px;
+}
+
+.badge-count {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: white;
+  line-height: 1;
+}
+
+.badge-total {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Progress bar */
+.progress-track {
+  margin-top: 20px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 3px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ==================
@@ -74,10 +124,9 @@ body {
    ================== */
 .card {
   background: var(--surface);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  border-radius: 0 0 var(--r) var(--r);
+  box-shadow: var(--shadow-lg);
   overflow: hidden;
-  border: 1px solid var(--border);
 }
 
 /* ==================
@@ -86,9 +135,9 @@ body {
 .input-section {
   display: flex;
   align-items: center;
-  padding: 18px 20px;
-  border-bottom: 1px solid var(--border);
+  padding: 16px 20px;
   gap: 10px;
+  border-bottom: 1px solid var(--border);
 }
 
 .toggle-all {
@@ -103,7 +152,7 @@ body {
   justify-content: center;
   border-radius: 8px;
   flex-shrink: 0;
-  transition: background var(--transition), color var(--transition);
+  transition: background var(--t), color var(--t);
   padding: 0;
 }
 
@@ -116,7 +165,7 @@ body {
   flex: 1;
   border: none;
   outline: none;
-  font-size: 1rem;
+  font-size: 0.975rem;
   color: var(--text);
   background: transparent;
   font-family: inherit;
@@ -129,21 +178,21 @@ body {
 
 .add-btn {
   padding: 8px 18px;
-  background: var(--primary);
+  background: var(--gradient);
   color: white;
   border: none;
   border-radius: 10px;
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background var(--transition), transform 0.1s ease, opacity var(--transition);
+  transition: opacity var(--t), transform 0.1s ease;
   flex-shrink: 0;
   font-family: inherit;
   white-space: nowrap;
 }
 
 .add-btn:hover:not(:disabled) {
-  background: var(--primary-hover);
+  opacity: 0.88;
 }
 
 .add-btn:active:not(:disabled) {
@@ -156,17 +205,21 @@ body {
 }
 
 /* ==================
-   Todo List
+   Todo List — individual card items
    ================== */
 .todo-list {
   list-style: none;
+  padding: 12px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 /* ==================
    Empty State
    ================== */
 .empty-state {
-  padding: 56px 20px;
+  padding: 52px 20px;
   text-align: center;
   color: var(--text-3);
 }
@@ -174,7 +227,7 @@ body {
 .empty-icon {
   font-size: 2.5rem;
   margin-bottom: 12px;
-  opacity: 0.6;
+  opacity: 0.55;
 }
 
 .empty-state p {
@@ -186,32 +239,26 @@ body {
    Todo Item
    ================== */
 @keyframes slide-in {
-  from {
-    opacity: 0;
-    transform: translateY(-6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-5px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .todo-item {
   display: flex;
   align-items: center;
-  padding: 14px 20px;
+  padding: 13px 14px;
   gap: 12px;
-  border-bottom: 1px solid var(--border);
-  transition: background var(--transition);
-  animation: slide-in 0.2s ease;
-}
-
-.todo-item:last-child {
-  border-bottom: none;
+  background: var(--item-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  transition: background var(--t), border-color var(--t), box-shadow var(--t);
+  animation: slide-in 0.22s ease;
 }
 
 .todo-item:hover {
-  background: #fafaff;
+  background: white;
+  border-color: #C7CDFA;
+  box-shadow: var(--shadow-sm);
 }
 
 /* Checkbox */
@@ -253,11 +300,11 @@ body {
 /* Todo text */
 .todo-text {
   flex: 1;
-  font-size: 0.975rem;
+  font-size: 0.95rem;
   line-height: 1.5;
   cursor: text;
   word-break: break-word;
-  transition: color 0.2s ease, text-decoration 0.2s ease;
+  transition: color 0.2s ease;
   user-select: none;
 }
 
@@ -272,7 +319,7 @@ body {
   flex: 1;
   border: none;
   outline: 2px solid var(--primary);
-  font-size: 0.975rem;
+  font-size: 0.95rem;
   font-family: inherit;
   color: var(--text);
   background: var(--primary-light);
@@ -297,7 +344,7 @@ body {
   flex-shrink: 0;
   font-size: 1.2rem;
   line-height: 1;
-  transition: opacity var(--transition), background var(--transition), color var(--transition);
+  transition: opacity var(--t), background var(--t), color var(--t);
   font-family: inherit;
 }
 
@@ -316,7 +363,7 @@ body {
 .filter-bar {
   display: flex;
   align-items: center;
-  padding: 12px 20px;
+  padding: 12px 18px 16px;
   gap: 8px;
   border-top: 1px solid var(--border);
   font-size: 0.825rem;
@@ -327,37 +374,40 @@ body {
 .item-count {
   flex: 1;
   white-space: nowrap;
+  font-size: 0.8rem;
+  color: var(--text-3);
   font-variant-numeric: tabular-nums;
 }
 
 .filters {
   display: flex;
-  gap: 4px;
+  gap: 6px;
 }
 
 .filter-btn {
-  padding: 4px 12px;
-  border: 1px solid transparent;
-  border-radius: 8px;
+  padding: 5px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
   background: none;
   cursor: pointer;
-  font-size: 0.825rem;
+  font-size: 0.8rem;
   color: var(--text-2);
-  transition: all var(--transition);
+  transition: all var(--t);
   font-family: inherit;
   line-height: 1.5;
+  font-weight: 500;
 }
 
 .filter-btn:hover {
-  border-color: var(--primary-light);
-  background: var(--primary-light);
-  color: var(--primary);
-}
-
-.filter-btn.active {
   border-color: var(--primary);
   color: var(--primary);
   background: var(--primary-light);
+}
+
+.filter-btn.active {
+  background: var(--gradient);
+  color: white;
+  border-color: transparent;
   font-weight: 600;
 }
 
@@ -365,11 +415,11 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 0.825rem;
+  font-size: 0.8rem;
   color: var(--text-3);
-  padding: 4px 8px;
-  border-radius: 8px;
-  transition: all var(--transition);
+  padding: 5px 8px;
+  border-radius: 999px;
+  transition: all var(--t);
   font-family: inherit;
   white-space: nowrap;
 }
@@ -384,31 +434,33 @@ body {
    ================== */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0f0f1a;
-    --surface: #16162a;
-    --primary-light: #252540;
-    --text: #e2e4f0;
-    --text-2: #8b8fa8;
-    --text-3: #55586c;
-    --border: #2a2a45;
-    --shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    --bg: #0d0e1c;
+    --surface: #161728;
+    --primary-light: #1e2040;
+    --item-bg: #1a1c30;
+    --text: #E2E4F0;
+    --text-2: #8B8FA8;
+    --text-3: #55586C;
+    --border: #272944;
+    --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.45);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
   }
 
-  .todo-item:hover { background: #1c1c35; }
-  .checkbox { background: #16162a; }
-  .todo-edit-input { background: #252540; color: var(--text); }
+  .app-header { border-radius: var(--r) var(--r) 0 0; }
+  .checkbox { background: #161728; }
+  .todo-edit-input { background: #1e2040; color: var(--text); }
+  .todo-item:hover { background: #1e2040; border-color: #383b6a; }
   .delete-btn:hover { background: rgba(244, 63, 94, 0.2); }
   .clear-btn:hover { background: rgba(244, 63, 94, 0.15); }
+  .filter-btn:hover { background: var(--primary-light); }
 }
 
 /* ==================
    Responsive
    ================== */
-@media (max-width: 480px) {
-  body { padding: 32px 12px 60px; }
-  .app-header h1 { font-size: 2.8rem; }
-  .filter-bar { font-size: 0.8rem; padding: 10px 16px; }
-  .filter-btn { padding: 3px 8px; }
-  .input-section { padding: 14px 16px; }
-  .todo-item { padding: 12px 16px; }
+@media (max-width: 520px) {
+  body { padding: 0 0 60px; }
+  .app-header { border-radius: 0; }
+  .card { border-radius: 0; }
+  .app { max-width: 100%; }
 }

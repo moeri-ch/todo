@@ -25,14 +25,31 @@ export function TodoApp() {
     totalCount === 0
       ? 'タスクを追加して始めましょう'
       : activeCount === 0
-      ? 'すべて完了！お疲れさまでした'
-      : `${activeCount} 件のタスクが残っています`;
+      ? 'すべて完了！お疲れさまでした 🎉'
+      : `あと ${activeCount} 件、頑張ろう！`;
+
+  const progressPct = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
   return (
     <div className="app">
       <header className="app-header">
-        <h1>Todo</h1>
-        <p className="tagline">{tagline}</p>
+        <div className="header-top">
+          <div>
+            <h1>Todoリスト</h1>
+            <p className="tagline">{tagline}</p>
+          </div>
+          {totalCount > 0 && (
+            <div className="header-badge">
+              <span className="badge-count">{completedCount}</span>
+              <span className="badge-total">/{totalCount} 完了</span>
+            </div>
+          )}
+        </div>
+        {totalCount > 0 && (
+          <div className="progress-track">
+            <div className="progress-fill" style={{ width: `${progressPct}%` }} />
+          </div>
+        )}
       </header>
 
       <div className="card">
