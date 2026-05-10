@@ -1,12 +1,15 @@
 # Todo
 
-React + TypeScript + Vite で作ったシンプルなTodoアプリ。
+Next.js + React + TypeScript で作ったシンプルなTodoアプリ。
+
+**デモ:** https://moeri-ch.github.io/todo/
 
 ## 機能
 
 - タスクの追加・完了・削除・インライン編集
 - すべて / 未完了 / 完了 フィルター
 - 全件一括切り替え、完了済み一括削除
+- 進捗バーと完了カウンター表示
 - ブラウザを閉じてもデータが残る（localStorage）
 - ダークモード対応（OS設定に自動連動）
 - スマホ対応
@@ -18,7 +21,7 @@ npm install
 npm run dev
 ```
 
-`http://localhost:5173` をブラウザで開く。
+`http://localhost:3000` をブラウザで開く。
 
 | 操作 | 方法 |
 |------|------|
@@ -29,6 +32,14 @@ npm run dev
 
 ## 技術スタック
 
-- [React 18](https://react.dev/)
+- [Next.js 15](https://nextjs.org/) (App Router)
+- [React 19](https://react.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Vite](https://vitejs.dev/)
+
+## デプロイ
+
+`master` ブランチへのプッシュで GitHub Actions が自動的に GitHub Pages へデプロイする。
+
+```bash
+npm run build   # out/ に静的ファイルを出力
+```
